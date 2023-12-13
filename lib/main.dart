@@ -56,11 +56,11 @@ Future getdata_password() async {
   return getpassword;
 }
 
-// Future getdata_questions() async {
-//   SharedPreferences prefer = await SharedPreferences.getInstance();
-//   var getquestions = prefer.getString('questions');
-//   return getquestions;
-// }
+Future getdata_questions() async {
+  SharedPreferences prefer = await SharedPreferences.getInstance();
+  List<String> getquestions = prefer.getStringList('questions') as List<String>;
+  return getquestions;
+}
 
 Future getdata_index_question() async {
   SharedPreferences prefer = await SharedPreferences.getInstance();
@@ -272,5 +272,35 @@ true4(int select) {
     return true;
   } else {
     return false;
+  }
+}
+
+questions_all(value) {
+  // questions.clear();
+
+  int c = 0;
+  for (int i = 0; i < set_questions.length; i++) {
+    if (c + 9 < value.length) {
+      questions.add(QuestionModel(
+          question: value[c].toString(),
+          time: num.parse(value[c + 1]),
+          answers: [
+            AnswerModel(
+                answer: value[c + 2].toString(),
+                isCorrect: bool.parse(value[c + 3])),
+            AnswerModel(
+                answer: value[c + 4].toString(),
+                isCorrect: bool.parse(value[c + 5])),
+            AnswerModel(
+                answer: value[c + 6].toString(),
+                isCorrect: bool.parse(value[c + 7])),
+            AnswerModel(
+                answer: value[c + 8].toString(),
+                isCorrect: bool.parse(value[c + 9])),
+          ]));
+      c = c + 10;
+    } else {
+      // handle error or break the loop
+    }
   }
 }

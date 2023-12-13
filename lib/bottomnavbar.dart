@@ -1,5 +1,7 @@
 // import 'dart:html';
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:quis/login.dart';
 import 'package:quis/pages.dart';
@@ -23,9 +25,11 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+
     setdata_choos();
     setdata_question();
     setdata_modelogin();
+    setlistquestions();
   }
 
   @override
@@ -38,9 +42,20 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
         actions: [
           InkWell(
               onTap: () {
-                Navigator.pop(context);
+                setlistquestions();
+                // Navigator.pop(context);
+                // Timer.periodic(Duration(seconds: 0), (timer) {
+                setdata_choos();
+                setdata_question();
+                setdata_modelogin();
+                // });
+                // questions.clear();
+                // questions_all(set_questions);
               },
-              child: Icon(Icons.download))
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Icon(Icons.save),
+              ))
         ],
         title: Text(
           (selectedIndex == 0)
@@ -316,10 +331,67 @@ class _BottomNavBarExampleState extends State<BottomNavBarExample> {
               padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
               child: InkWell(
                 onTap: () {
-                  mode = '0';
-                  setdata_modelogin();
-                  delete_storage();
-                  Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: light_color,
+                        title: Text(
+                          'Log Out',
+                          style: TextStyle(
+                            color: dark_color,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        content: Text(
+                          'Do you want to log out?',
+                          style: TextStyle(
+                            color: dark_color,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        actions: [
+                          InkWell(
+                            onTap: () {
+                              mode = '0';
+                              setdata_modelogin();
+                              delete_storage();
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Text(
+                                'Yes',
+                                style: TextStyle(
+                                  color: dark_color,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              'Cancle',
+                              style: TextStyle(
+                                color: dark_color,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  // mode = '0';
+                  // setdata_modelogin();
+                  // delete_storage();
+                  // Navigator.pop(context);
                 },
                 child: Container(
                   width: double.maxFinite,
@@ -392,7 +464,7 @@ setdata_question() async {
   prefer.setString('score', score.toString());
   prefer.setString('index_question', index_question.toString());
   prefer.setString('count', count.toString());
-  // prefer.setString('questions', questions.toString());
+  prefer.setStringList('questions', set_questions);
   print('set question');
 }
 
@@ -402,4 +474,25 @@ setdata_modelogin() async {
   SharedPreferences prefer = await SharedPreferences.getInstance();
   prefer.setString('mode', mode);
   print('set mode');
+}
+
+List<String> set_questions = [];
+setlistquestions() {
+  set_questions.clear();
+  for (int i = 0; i < questions.length; i++) {
+    if (i < questions.length) {
+      set_questions.add(questions[i].question);
+      set_questions.add(questions[i].time.toString());
+      set_questions.add(questions[i].answers[0].answer);
+      set_questions.add(questions[i].answers[0].isCorrect.toString());
+      set_questions.add(questions[i].answers[1].answer);
+      set_questions.add(questions[i].answers[1].isCorrect.toString());
+      set_questions.add(questions[i].answers[2].answer);
+      set_questions.add(questions[i].answers[2].isCorrect.toString());
+      set_questions.add(questions[i].answers[3].answer);
+      set_questions.add(questions[i].answers[3].isCorrect.toString());
+    }
+  }
+  // print(set_questions);
+  return set_questions;
 }

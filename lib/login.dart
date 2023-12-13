@@ -26,65 +26,6 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement initState
     super.initState();
 
-    // getdata_username().then((value) {
-    //   print('name' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       username.text = value.toString();
-    //     }
-    //   });
-    // });
-    // getdata_password().then((value) {
-    //   print('password' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       password.text = value.toString();
-    //     }
-    //   });
-    // });
-    // getdata_score().then((value) {
-    //   print('score' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       score = int.parse(value);
-    //     }
-    //   });
-    // });
-    // getdata_count().then((value) {
-    //   print('count' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       count = int.parse(value);
-    //     }
-    //   });
-    // });
-    // getdata_chooscolor().then((value) {
-    //   print('color' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       choos_color = value.toString();
-    //       color_value(value);
-    //     }
-    //   });
-    // });
-    // getdata_chooslanguage().then((value) {
-    //   print('language' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       choos_language = value.toString();
-    //     }
-    //   });
-    // });
-    // getdata_index_question().then((value) {
-    //   print('index_question' + value!);
-    //   setState(() {
-    //     if (value != null) {
-    //       index_question = int.parse(value);
-    //     }
-    //   });
-    // });
-    // getdata_index_question().then((value) {
-    //   print('que' + value);
     // });
   }
 

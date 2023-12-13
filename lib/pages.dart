@@ -49,7 +49,7 @@ List<Widget> pages = [
             },
             leading: (count <= index)
                 ? Icon(
-                    Icons.shower,
+                    Icons.remove_red_eye_outlined,
                     color: light_color,
                   )
                 : InkWell(
@@ -151,7 +151,7 @@ List<Widget> pages = [
                       );
                     },
                     child: Icon(
-                      Icons.shower,
+                      Icons.remove_red_eye,
                       color: dark_color,
                     ),
                   ),
@@ -669,7 +669,7 @@ List<Widget> pages = [
                                           ),
                                         ),
                                         Text(
-                                          ' ${questions.length - score}',
+                                          ' ${count - score}',
                                           style: TextStyle(
                                             color: Colors.red,
                                             fontWeight: FontWeight.bold,
